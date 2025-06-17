@@ -3,7 +3,7 @@
 #define NEWTON_RAPHSON_H
 
 #include <functional>
-#include "../common.h"
+#include "../returns.h"
 
 using namespace std;
 

@@ -1,6 +1,6 @@
 
-#ifndef COMMON_H
-#define COMMON_H
+#ifndef RETURNS_H
+#define RETURNS_H
 
 #include <optional>
 #include <string>
@@ -20,4 +20,4 @@ struct SolutionReport {
     std::string message;
 };
 
-#endif // COMMON_H
+#endif

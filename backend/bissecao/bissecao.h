@@ -3,7 +3,7 @@
 #define BISSECAO_H
 
 #include <functional>
-#include "../common.h"
+#include "../returns.h"
 
 class Bissecao {
 public:

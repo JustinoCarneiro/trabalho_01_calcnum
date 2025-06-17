@@ -3,7 +3,7 @@
 #define POSICAO_FALSA_H
 
 #include <functional>
-#include "../common.h"
+#include "../returns.h"
 
 class PosicaoFalsa {
 public:
