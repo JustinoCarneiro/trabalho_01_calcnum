@@ -7,13 +7,12 @@
             "args": [
                 "-fdiagnostics-color=always",
                 "-g",
-                // Arquivos a serem compilados
                 "${workspaceFolder}/main.cpp",
                 "${workspaceFolder}/backend/bissecao/bissecao.cpp",
                 "${workspaceFolder}/backend/newton_raphson/newton_raphson.cpp",
                 "${workspaceFolder}/backend/posicao_falsa/posicao_falsa.cpp",
                 "-o",
-                "${fileDirname}/main" // Saída unificada
+                "${fileDirname}/main"
             ],
             "options": {
                 "cwd": "${fileDirname}"
@@ -27,7 +26,6 @@
             },
             "detail": "Tarefa gerada pelo Depurador."
         }
-        // ... (pode haver outras tarefas aqui)
     ],
     "version": "2.0.0"
 }
