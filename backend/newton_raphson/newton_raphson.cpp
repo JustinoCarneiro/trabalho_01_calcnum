@@ -52,7 +52,7 @@ SolutionReport NewtonRaphson::solucao(double chute_inicial) const {
     } else {
         return {
             SolutionStatus::FAILURE_MAX_ITERATIONS_REACHED,
-            std::nullopt,
+            nullopt,
             v_max_iter,
             "Falha: Número máximo de iterações foi atingido."
         };
