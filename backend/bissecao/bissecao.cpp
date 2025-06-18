@@ -14,15 +14,6 @@ Bissecao::Bissecao(
 }
 
 SolutionReport Bissecao::encontrar_raiz(double a, double b) const {
-    if (v_f(a) * v_f(b) >= 0) {
-        return {
-            SolutionStatus::FAILURE_NO_ROOT_IN_INTERVAL,
-            nullopt,
-            0,
-            "Falha: Não há garantia de raiz no intervalo fornecido (f(a) * f(b) >= 0)."
-        };
-    }
-
     double x_meio;
     int i = 0;
 

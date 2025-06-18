@@ -11,6 +11,7 @@
                 "${workspaceFolder}/backend/bissecao/bissecao.cpp",
                 "${workspaceFolder}/backend/newton_raphson/newton_raphson.cpp",
                 "${workspaceFolder}/backend/posicao_falsa/posicao_falsa.cpp",
+                "${workspaceFolder}/backend/encontrar_intervalo/encontrar_intervalo.cpp",
                 "-o",
                 "${fileDirname}/main"
             ],

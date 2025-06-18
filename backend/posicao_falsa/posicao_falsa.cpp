@@ -17,17 +17,7 @@ PosicaoFalsa::PosicaoFalsa(
 SolutionReport PosicaoFalsa::encontrar_raiz(double a, double b) const {
     double fa = v_f(a);
     double fb = v_f(b);
-
-    if (fa * fb >= 0) {
-        return {
-            SolutionStatus::FAILURE_NO_ROOT_IN_INTERVAL,
-            nullopt,
-            0,
-            "Falha: Não há garantia de raiz no intervalo fornecido (f(a) * f(b) >= 0)."
-        };
-    }
-
-    double x;
+    double x = 0.0;
     int i = 0;
 
     while (i < v_max_iter) {
