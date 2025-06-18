@@ -19,6 +19,42 @@ double df(double a, double d) {
     return a - 1 - log(d);
 }
 
+pair<double, double> encontrar_intervalo(const function<double(double)>& func) {
+    double ptn_ini = 1.0;
+    double passo = 0.5;
+    int max_passos = 100;
+
+    double f_ini = func(ptn_ini);
+    if (isnan(f_ini)) return {NAN, NAN};
+
+    double ptn_prox = ptn_ini;
+    for (int i = 0; i < max_passos; ++i) {
+        ptn_prox += passo;
+        double f_current = func(ptn_prox);
+        if (isnan(f_current)) continue;
+
+        if (f_ini * f_current < 0) {
+            return {ptn_ini, ptn_prox};
+        }
+    }
+
+    ptn_prox = ptn_ini;
+    passo = -passo;
+     for (int i = 0; i < max_passos; ++i) {
+        ptn_prox += passo;
+        if (ptn_prox <= 0) continue;
+        
+        double f_current = func(ptn_prox);
+        if (isnan(f_current)) continue;
+
+        if (f_ini * f_current < 0) {
+            return {ptn_prox, ptn_ini};
+        }
+    }
+
+    return {NAN, NAN};
+}
+
 void gera_quadro_resposta(const vector<double>& valores_a, double tolerancia) {
     cout << fixed << setprecision(6);
     cout << "==========================================================================\n";
