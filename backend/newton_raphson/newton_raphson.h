@@ -12,6 +12,7 @@ public:
     NewtonRaphson(
         function<double(double)> f,
         function<double(double)> df,
+        function<double(double)> ddf,
         double tol,
         int max_iter
     );
@@ -24,8 +25,14 @@ public:
 private:
     function<double(double)> v_f;
     function<double(double)> v_df;
+    function<double(double)> v_ddf;
     double v_tol;
     int v_max_iter;
+
+    bool verificarContinuidade(
+        const function<double(double)>& func,
+        double inicio_intervalo,
+        double fim_intervalo) const;
 };
 
 #endif

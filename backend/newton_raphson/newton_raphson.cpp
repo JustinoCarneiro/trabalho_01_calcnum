@@ -9,12 +9,48 @@ using namespace std;
 NewtonRaphson::NewtonRaphson(
     function<double(double)> f,
     function<double(double)> df,
+    function<double(double)> ddf,
     double tol,
     int max_iter) {
     v_f = f;
     v_df = df;
+    v_ddf = ddf;
     v_tol = tol;
     v_max_iter = max_iter;
+}
+
+bool NewtonRaphson::verificarContinuidade(
+    const function<double(double)>& func,
+    double ini,
+    double fim) const {
+    
+    const int qtd_passos = 1000;
+    const double salto_lim = 1e6;
+    
+    double passo = (fim - ini) / qtd_passos;
+
+    double y_ini = func(ini); 
+
+    if (!isfinite(y_ini)) {
+        return false;
+    }
+
+    for (int i = 1; i <= qtd_passos; ++i) {
+        double x = ini + i * passo;
+        double y_prox = func(x);
+
+        if (!isfinite(y_prox)) {
+            return false;
+        }
+
+        if (abs(y_prox - y_ini) > salto_lim) {
+            return false;
+        }
+        
+        y_ini = y_prox;
+    }
+
+    return true;
 }
 
 SolutionReport NewtonRaphson::solucao(double chute_inicial) const {
@@ -23,6 +59,22 @@ SolutionReport NewtonRaphson::solucao(double chute_inicial) const {
     double e = v_tol+1;
     int i = 0;
     
+    double ini_interv = chute_inicial - 0.5;
+    double fim_interv = chute_inicial + 0.5;
+
+    if (!verificarContinuidade(v_f, ini_interv, fim_interv) ||
+        !verificarContinuidade(v_df, ini_interv, fim_interv) ||
+        !verificarContinuidade(v_ddf, ini_interv, fim_interv)) {
+        
+        return {
+            SolutionStatus::FAILURE_DISCONTINUITY_DETECTED,
+            nullopt,
+            0,
+            "Falha: Descontinuidade detectada em f, df ou ddf no intervalo de verificação."
+        };
+    }
+
+
     while(e > v_tol && i < v_max_iter){
         double valor_df = v_df(x0);
 

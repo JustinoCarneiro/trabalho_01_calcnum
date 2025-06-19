@@ -19,6 +19,10 @@ double df(double a, double d) {
     return a - 1 - log(d);
 }
 
+double ddf(double a, double d) {
+    return 1/d;
+}
+
 void gera_quadro_resposta(const vector<double>& vetor_a, double tol) {
     cout << fixed << setprecision(6);
     cout << "==========================================================================\n";
@@ -28,13 +32,14 @@ void gera_quadro_resposta(const vector<double>& vetor_a, double tol) {
     for (double a : vetor_a) {
         auto func = [a](double d) { return f(a, d); };
         auto dfunc = [a](double d) { return df(a, d); };
+        auto ddfunc = [a](double d) { return df(a, d); };
 
         pair<double, double> intervalo = encontrar_intervalo(func);
         
         if (!isnan(intervalo.first)) {
             double chute_inicial = (intervalo.first + intervalo.second)/2;
 
-            NewtonRaphson newton(func, dfunc, tol, 25);
+            NewtonRaphson newton(func, dfunc, ddfunc, tol, 25);
             SolutionReport r_newton = newton.solucao(chute_inicial);
 
             string raiz_newton = (r_newton.raiz && !isnan(r_newton.raiz.value()))
