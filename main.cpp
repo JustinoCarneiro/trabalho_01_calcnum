@@ -94,7 +94,7 @@ void gera_quadro_resposta(const vector<double>& vetor_a, double tol) {
 }
 
 int main() {
-    vector<double> vetor_a = {1.1, 1.2, 1.4, 1.6, 1.8, 2.0};
+    vector<double> vetor_a = {0.06, 0.08, 0.2, 0.4, 0.6, 0.8, 1};
     double tol = 0.0001;
     gera_quadro_resposta(vetor_a, tol);
 
