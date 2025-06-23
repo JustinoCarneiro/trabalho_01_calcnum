@@ -26,9 +26,9 @@ double ddf(double a, double d) {
 
 void gera_quadro_resposta(const vector<double>& vetor_a, double tol) {
     cout << fixed << setprecision(6);
-    cout << "==========================================================================\n";
-    cout << "|  a   | Metodo           |   Raiz (d)  | Iteracoes |   Status   |\n";
-    cout << "==========================================================================\n";
+    cout << "=============================================================================================\n";
+    cout << "|  a   | Metodo           |   Raiz (d)  | Iteracoes |   Status   |    Intervalo   |\n";
+    cout << "=============================================================================================\n";
 
     for (double a : vetor_a) {
         auto func = [a](double d) { return f(a, d); };
@@ -38,6 +38,7 @@ void gera_quadro_resposta(const vector<double>& vetor_a, double tol) {
         pair<double, double> intervalo = encontrar_intervalo(func);
         
         if (!isnan(intervalo.first)) {
+            string intervalo_str = "[" + to_string(intervalo.first).substr(0, 6) + ", " + to_string(intervalo.second).substr(0, 6) + "]";
             double chute_inicial = (intervalo.first + intervalo.second)/2;
 
             NewtonRaphson newton(func, dfunc, ddfunc, tol, 25);
@@ -54,7 +55,8 @@ void gera_quadro_resposta(const vector<double>& vetor_a, double tol) {
                 << "| " << setw(17) << "Newton-Raphson"
                 << "| " << setw(12) << raiz_newton
                 << "| " << setw(10) << (r_newton.status == SolutionStatus::SUCCESS ? to_string(r_newton.iter) : "--")
-                << "| " << setw(10) << status_newton << "|\n";
+                << "| " << setw(10) << status_newton
+                << "| " << setw(15) << intervalo_str << " |\n";
 
             Bissecao bissecao(func, tol, 100);
             SolutionReport r_bissec = bissecao.encontrar_raiz(intervalo.first, intervalo.second);
@@ -70,7 +72,8 @@ void gera_quadro_resposta(const vector<double>& vetor_a, double tol) {
                 << "| " << setw(17) << "Bissecao"
                 << "| " << setw(12) << raiz_bissec
                 << "| " << setw(10) << (r_bissec.status == SolutionStatus::SUCCESS ? to_string(r_bissec.iter) : "--")
-                << "| " << setw(10) << status_bissec << "|\n";
+                << "| " << setw(10) << status_bissec
+                << "| " << setw(15) << intervalo_str << " |\n";
 
             PosicaoFalsa posicaoFalsa(func, tol, 100);
             SolutionReport r_posfal = posicaoFalsa.encontrar_raiz(intervalo.first, intervalo.second);
@@ -86,11 +89,12 @@ void gera_quadro_resposta(const vector<double>& vetor_a, double tol) {
                 << "| " << setw(17) << "Posicao Falsa"
                 << "| " << setw(12) << raiz_pf
                 << "| " << setw(10) << (r_posfal.status == SolutionStatus::SUCCESS ? to_string(r_posfal.iter) : "--")
-                << "| " << setw(10) << status_pf << "|\n";
+                << "| " << setw(10) << status_pf
+                << "| " << setw(15) << intervalo_str << " |\n";
         } else {
-            cout << "Erro: Intervalo não conseguiu ser estabelecido!";
+            cout << "Erro: Intervalo não conseguiu ser estabelecido!\n";
         }
-        cout << "--------------------------------------------------------------------------\n";
+        cout << "---------------------------------------------------------------------------------------------\n";
     }
 }
 
