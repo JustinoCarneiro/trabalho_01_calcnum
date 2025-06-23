@@ -21,7 +21,7 @@ double df(double a, double d) {
 }
 
 double ddf(double a, double d) {
-    return 1/d;
+    return -(1/d);
 }
 
 void gera_quadro_resposta(const vector<double>& vetor_a, double tol) {

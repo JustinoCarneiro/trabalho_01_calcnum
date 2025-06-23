@@ -18,7 +18,7 @@ double dff(double a, double d) {
     return a - 1 - log(d);
 }
 double ddff(double d) {
-    return 1/d;
+    return -(1/d);
 }
 
 void newton_raphson_solution_teste(double a, function<double(double)> func,
