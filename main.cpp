@@ -3,6 +3,7 @@
 #include "backend/posicao_falsa/posicao_falsa.h"
 #include "backend/newton_raphson/newton_raphson.h"
 #include "backend/encontrar_intervalo/encontrar_intervalo.h"
+#include "backend/teste_a=1/teste_a1.cpp"
 #include <vector>
 #include <iostream>
 #include <iomanip>
@@ -96,6 +97,8 @@ void gera_quadro_resposta(const vector<double>& vetor_a, double tol) {
 int main() {
     vector<double> vetor_a = {0.06, 0.08, 0.2, 0.4, 0.6, 0.8, 1};
     double tol = 0.0001;
+    teste_metodos_a1();
+    std::cout << "==========================================================================\n";
     gera_quadro_resposta(vetor_a, tol);
 
     return 0;

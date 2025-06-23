@@ -1,3 +1,0 @@
-/workspaces/trabalho_01_calcnum/build/CMakeFiles/main.dir
-/workspaces/trabalho_01_calcnum/build/CMakeFiles/edit_cache.dir
-/workspaces/trabalho_01_calcnum/build/CMakeFiles/rebuild_cache.dir
